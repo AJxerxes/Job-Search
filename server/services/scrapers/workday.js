@@ -58,32 +58,149 @@ class WorkdayScraper {
 
   createMockCompanyJobs(company, role) {
     const companyInfo = {
-      'microsoft': { name: 'Microsoft', location: 'Redmond, WA', salary: '$150k - $250k' },
-      'apple': { name: 'Apple', location: 'Cupertino, CA', salary: '$160k - $280k' },
-      'google': { name: 'Google', location: 'Mountain View, CA', salary: '$170k - $300k' },
-      'amazon': { name: 'Amazon', location: 'Seattle, WA', salary: '$140k - $240k' },
-      'meta': { name: 'Meta', location: 'Menlo Park, CA', salary: '$180k - $320k' },
-      'salesforce': { name: 'Salesforce', location: 'San Francisco, CA', salary: '$150k - $260k' },
-      'oracle': { name: 'Oracle', location: 'Austin, TX', salary: '$130k - $220k' },
-      'adobe': { name: 'Adobe', location: 'San Jose, CA', salary: '$140k - $240k' },
-      'servicenow': { name: 'ServiceNow', location: 'Santa Clara, CA', salary: '$150k - $250k' },
-      'snowflake': { name: 'Snowflake', location: 'San Mateo, CA', salary: '$160k - $280k' },
-      'databricks': { name: 'Databricks', location: 'San Francisco, CA', salary: '$170k - $290k' },
-      'atlassian': { name: 'Atlassian', location: 'San Francisco, CA', salary: '$140k - $230k' },
-      'slack': { name: 'Slack', location: 'San Francisco, CA', salary: '$135k - $225k' },
-      'zoom': { name: 'Zoom', location: 'San Jose, CA', salary: '$130k - $210k' },
-      'docusign': { name: 'DocuSign', location: 'San Francisco, CA', salary: '$125k - $200k' },
-      'twilio': { name: 'Twilio', location: 'San Francisco, CA', salary: '$140k - $230k' }
+      'microsoft': { 
+        name: 'Microsoft', 
+        location: 'Redmond, WA', 
+        salary: '$150k - $250k',
+        size: '10,000+',
+        industry: ['Cloud', 'Enterprise Software', 'AI'],
+        funding: 'Public Company'
+      },
+      'apple': { 
+        name: 'Apple', 
+        location: 'Cupertino, CA', 
+        salary: '$160k - $280k',
+        size: '10,000+',
+        industry: ['Consumer Electronics', 'Software', 'Services'],
+        funding: 'Public Company'
+      },
+      'google': { 
+        name: 'Google', 
+        location: 'Mountain View, CA', 
+        salary: '$170k - $300k',
+        size: '10,000+',
+        industry: ['Search', 'Cloud', 'AI'],
+        funding: 'Public Company (Alphabet)'
+      },
+      'amazon': { 
+        name: 'Amazon', 
+        location: 'Seattle, WA', 
+        salary: '$140k - $240k',
+        size: '10,000+',
+        industry: ['E-commerce', 'Cloud', 'Logistics'],
+        funding: 'Public Company'
+      },
+      'meta': { 
+        name: 'Meta', 
+        location: 'Menlo Park, CA', 
+        salary: '$180k - $320k',
+        size: '10,000+',
+        industry: ['Social Media', 'VR/AR', 'AI'],
+        funding: 'Public Company'
+      },
+      'salesforce': { 
+        name: 'Salesforce', 
+        location: 'San Francisco, CA', 
+        salary: '$150k - $260k',
+        size: '10,000+',
+        industry: ['CRM', 'Cloud', 'SaaS'],
+        funding: 'Public Company'
+      },
+      'oracle': { 
+        name: 'Oracle', 
+        location: 'Austin, TX', 
+        salary: '$130k - $220k',
+        size: '10,000+',
+        industry: ['Database', 'Cloud', 'Enterprise'],
+        funding: 'Public Company'
+      },
+      'adobe': { 
+        name: 'Adobe', 
+        location: 'San Jose, CA', 
+        salary: '$140k - $240k',
+        size: '10,000+',
+        industry: ['Creative Software', 'SaaS', 'Marketing'],
+        funding: 'Public Company'
+      },
+      'servicenow': { 
+        name: 'ServiceNow', 
+        location: 'Santa Clara, CA', 
+        salary: '$150k - $250k',
+        size: '5001 - 10000',
+        industry: ['Enterprise Software', 'Workflow', 'Cloud'],
+        funding: 'Public Company'
+      },
+      'snowflake': { 
+        name: 'Snowflake', 
+        location: 'San Mateo, CA', 
+        salary: '$160k - $280k',
+        size: '1001 - 5000',
+        industry: ['Data Cloud', 'Analytics', 'SaaS'],
+        funding: 'Public Company'
+      },
+      'databricks': { 
+        name: 'Databricks', 
+        location: 'San Francisco, CA', 
+        salary: '$170k - $290k',
+        size: '1001 - 5000',
+        industry: ['Data Analytics', 'ML', 'Cloud'],
+        funding: 'Series I $1.6B'
+      },
+      'atlassian': { 
+        name: 'Atlassian', 
+        location: 'San Francisco, CA', 
+        salary: '$140k - $230k',
+        size: '5001 - 10000',
+        industry: ['Collaboration', 'DevTools', 'SaaS'],
+        funding: 'Public Company'
+      },
+      'slack': { 
+        name: 'Slack', 
+        location: 'San Francisco, CA', 
+        salary: '$135k - $225k',
+        size: '1001 - 5000',
+        industry: ['Communication', 'Collaboration', 'SaaS'],
+        funding: 'Acquired by Salesforce'
+      },
+      'zoom': { 
+        name: 'Zoom', 
+        location: 'San Jose, CA', 
+        salary: '$130k - $210k',
+        size: '1001 - 5000',
+        industry: ['Video Communications', 'SaaS', 'Remote Work'],
+        funding: 'Public Company'
+      },
+      'docusign': { 
+        name: 'DocuSign', 
+        location: 'San Francisco, CA', 
+        salary: '$125k - $200k',
+        size: '1001 - 5000',
+        industry: ['Digital Transaction', 'SaaS', 'Legal Tech'],
+        funding: 'Public Company'
+      },
+      'twilio': { 
+        name: 'Twilio', 
+        location: 'San Francisco, CA', 
+        salary: '$140k - $230k',
+        size: '1001 - 5000',
+        industry: ['Communications API', 'Cloud', 'Developer Tools'],
+        funding: 'Public Company'
+      }
     };
 
     const info = companyInfo[company] || { 
       name: company.charAt(0).toUpperCase() + company.slice(1), 
       location: 'Remote', 
-      salary: '$120k - $200k' 
+      salary: '$120k - $200k',
+      size: '1001 - 5000',
+      industry: ['Technology', 'Software'],
+      funding: 'Private Company'
     };
 
-    // 40% chance of having a matching job
-    if (Math.random() > 0.6) {
+    const experienceLevels = ['Entry-level', 'Junior', 'Mid-level', 'Senior', 'Lead'];
+
+    // 50% chance of having a matching job for major companies
+    if (Math.random() > 0.5) {
       const variations = [
         `${role}`,
         `Senior ${role}`,
@@ -96,15 +213,21 @@ class WorkdayScraper {
         id: `workday_${company}_${Date.now()}`,
         title: variations[Math.floor(Math.random() * variations.length)],
         company: info.name,
+        companySize: info.size,
+        industryTags: info.industry,
+        funding: info.funding,
         location: info.location,
-        description: `Join ${info.name} as a ${role} and drive innovation in our dynamic team. We're looking for someone passionate about technology and making an impact.`,
+        description: `Join ${info.name} as a ${role} and drive innovation in our dynamic team. We're looking for someone passionate about technology and making an impact. This role offers exceptional growth opportunities in a leading tech company.`,
         url: `https://${company}.wd1.myworkdayjobs.com/${company}_External_Career_Site/job/example`,
         postedDate: moment().subtract(Math.floor(Math.random() * 3), 'hours').toISOString(),
         platform: 'Workday',
         salary: info.salary,
         type: 'Full-time',
-        benefits: ['Health Insurance', '401k', 'Stock Options', 'Flexible PTO'],
-        skills: this.generateSkills(role)
+        experienceLevel: experienceLevels[Math.floor(Math.random() * experienceLevels.length)],
+        h1bSponsorship: true, // Major tech companies typically sponsor H1B
+        benefits: ['Health Insurance', '401k', 'Stock Options', 'Flexible PTO', 'Remote Work Options'],
+        skills: this.generateSkills(role),
+        remote: Math.random() > 0.4 // 60% chance of remote option
       }];
     }
 

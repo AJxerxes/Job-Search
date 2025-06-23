@@ -246,10 +246,19 @@
 }
 
 .job-card-enhanced {
-  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.95) 100%);
   border-radius: 16px;
   overflow: hidden;
   position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.job-card-enhanced:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  border-color: rgba(102, 126, 234, 0.2);
 }
 
 .job-card-enhanced::before {
@@ -265,28 +274,36 @@
 .salary-highlight {
   background: linear-gradient(45deg, #4CAF50, #45a049);
   color: white !important;
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
 }
 
 .location-chip {
   background: linear-gradient(45deg, #2196F3, #1976D2);
   color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 0.75rem;
   margin-left: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.25);
 }
 
 .country-chip {
   background: linear-gradient(45deg, #FF9800, #F57C00);
   color: white;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 0.75rem;
-  margin-left: 4px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  margin-left: 6px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(255, 152, 0, 0.25);
 }
 
 .no-jobs-container {
@@ -408,4 +425,317 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(45deg, #764ba2, #667eea);
+}
+
+/* Enhanced Job Cards inspired by Remote Rocketship */
+.job-card-enhanced {
+  background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.95) 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.job-card-enhanced:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+.job-card-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+}
+
+/* Enhanced salary highlight */
+.salary-highlight {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+  color: white !important;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+/* Industry and company tags */
+.industry-tag {
+  background: linear-gradient(45deg, #E3F2FD, #BBDEFB);
+  color: #1565C0;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Funding badge */
+.funding-badge {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 6px rgba(76, 175, 80, 0.25);
+}
+
+/* H1B Sponsorship indicator */
+.h1b-indicator {
+  background: linear-gradient(45deg, #FF9800, #F57C00);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  box-shadow: 0 2px 6px rgba(255, 152, 0, 0.25);
+}
+
+/* Enhanced location and country chips */
+.location-chip {
+  background: linear-gradient(45deg, #2196F3, #1976D2);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 0.75rem;
+  margin-left: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.25);
+}
+
+.country-chip {
+  background: linear-gradient(45deg, #FF9800, #F57C00);
+  color: white;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  margin-left: 6px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(255, 152, 0, 0.25);
+}
+
+/* Enhanced platform chips with specific colors */
+.platform-chip {
+  margin: 4px;
+  color: white !important;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  text-transform: none;
+}
+
+.platform-chip.linkedin { 
+  background: linear-gradient(45deg, #0077B5, #005885) !important; 
+}
+.platform-chip.wellfound { 
+  background: linear-gradient(45deg, #FF6B35, #F7931E) !important; 
+}
+.platform-chip.greenhouse { 
+  background: linear-gradient(45deg, #00C896, #00A085) !important; 
+}
+.platform-chip.lever { 
+  background: linear-gradient(45deg, #7B68EE, #6A5ACD) !important; 
+}
+.platform-chip.workable { 
+  background: linear-gradient(45deg, #FF6B6B, #EE5A5A) !important; 
+}
+.platform-chip.smartrecruiters { 
+  background: linear-gradient(45deg, #4ECDC4, #44A08D) !important; 
+}
+.platform-chip.builtin { 
+  background: linear-gradient(45deg, #667eea, #764ba2) !important; 
+}
+.platform-chip.notion { 
+  background: linear-gradient(45deg, #000000, #434343) !important; 
+}
+.platform-chip.ycombinator { 
+  background: linear-gradient(45deg, #FF6600, #FF8800) !important; 
+}
+.platform-chip.workday { 
+  background: linear-gradient(45deg, #F77B00, #FE9900) !important; 
+}
+
+/* Enhanced time display */
+.time-indicator {
+  color: #4CAF50;
+  font-weight: 600;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.time-indicator::before {
+  content: '🕐';
+  font-size: 0.8rem;
+}
+
+/* Enhanced skills tags */
+.skill-tag {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin: 2px;
+  display: inline-block;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.25);
+}
+
+.skill-tag:hover {
+  background: linear-gradient(45deg, #764ba2, #667eea);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.35);
+}
+
+/* Experience level indicators */
+.experience-chip {
+  background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* Company size indicators */
+.company-size-chip {
+  background: rgba(0,0,0,0.05);
+  color: #666;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Enhanced job statistics */
+.job-stats {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+}
+
+.job-stats .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  transition: transform 0.2s ease;
+}
+
+.job-stats .stat-item:hover {
+  transform: translateY(-2px);
+}
+
+.job-stats .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+  text-shadow: none;
+}
+
+.job-stats .stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Enhanced button styles */
+.enhanced-apply-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2) !important;
+  color: white !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  padding: 8px 20px !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.enhanced-apply-btn:hover {
+  background: linear-gradient(45deg, #764ba2, #667eea) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+}
+
+.enhanced-view-btn {
+  border-color: #667eea !important;
+  color: #667eea !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  border-radius: 12px !important;
+  padding: 8px 16px !important;
+  transition: all 0.3s ease !important;
+}
+
+.enhanced-view-btn:hover {
+  border-color: #764ba2 !important;
+  color: #764ba2 !important;
+  background: rgba(102, 126, 234, 0.04) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Loading animations */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.4); }
+  50% { box-shadow: 0 0 30px rgba(102, 126, 234, 0.8); }
+}
+
+.loading-card {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+  .job-card-enhanced {
+    margin-bottom: 16px;
+  }
+  
+  .platform-chip {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+  
+  .salary-highlight {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+  }
+  
+  .skill-tag {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
 } 

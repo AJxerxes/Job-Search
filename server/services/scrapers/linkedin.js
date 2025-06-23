@@ -77,8 +77,16 @@ class LinkedInScraper {
       ];
       
       const companies = [
-        'TechCorp', 'InnovateCo', 'StartupXYZ', 'MegaCorp', 'DigitalFirst',
-        'CloudTech', 'DataDriven', 'AI Solutions', 'NextGen Systems', 'FutureTech'
+        { name: 'TechCorp', size: '501 - 1000', industry: ['SaaS', 'B2B'], funding: 'Series B $15M' },
+        { name: 'InnovateCo', size: '51 - 200', industry: ['Fintech', 'AI'], funding: 'Series A $8M' },
+        { name: 'StartupXYZ', size: '11 - 50', industry: ['EdTech', 'B2C'], funding: 'Seed $2M' },
+        { name: 'MegaCorp', size: '1001 - 5000', industry: ['Enterprise', 'Cloud'], funding: 'IPO 2023' },
+        { name: 'DigitalFirst', size: '201 - 500', industry: ['Marketing', 'Analytics'], funding: 'Series C $25M' },
+        { name: 'CloudTech', size: '101 - 250', industry: ['Infrastructure', 'DevOps'], funding: 'Series B $12M' },
+        { name: 'DataDriven', size: '251 - 500', industry: ['Data Science', 'ML'], funding: 'Series B $18M' },
+        { name: 'AI Solutions', size: '51 - 200', industry: ['Artificial Intelligence', 'Automation'], funding: 'Series A $10M' },
+        { name: 'NextGen Systems', size: '501 - 1000', industry: ['Cybersecurity', 'Enterprise'], funding: 'Series D $40M' },
+        { name: 'FutureTech', size: '11 - 50', industry: ['IoT', 'Hardware'], funding: 'Seed $3M' }
       ];
       
       const locations = [
@@ -86,24 +94,36 @@ class LinkedInScraper {
         'Boston, MA', 'Chicago, IL', 'Denver, CO', 'Remote', 'Los Angeles, CA',
         'Atlanta, GA', 'Toronto, Canada', 'London, UK', 'Berlin, Germany'
       ];
+
+      const experienceLevels = ['Entry-level', 'Junior', 'Mid-level', 'Senior', 'Lead'];
       
       // Generate more precise recent timestamps (within last 3 hours)
       const maxMinutesAgo = 180; // 3 hours
       const minutesAgo = Math.floor(Math.random() * maxMinutesAgo);
       const postedDate = moment().subtract(minutesAgo, 'minutes').toISOString();
       
+      const company = companies[Math.floor(Math.random() * companies.length)];
+      const selectedTitle = variations[Math.floor(Math.random() * variations.length)];
+      
       jobs.push({
         id: `linkedin_${Date.now()}_${i}`,
-        title: variations[Math.floor(Math.random() * variations.length)],
-        company: companies[Math.floor(Math.random() * companies.length)],
+        title: selectedTitle,
+        company: company.name,
+        companySize: company.size,
+        industryTags: company.industry,
+        funding: Math.random() > 0.6 ? company.funding : null,
         location: locations[Math.floor(Math.random() * locations.length)],
-        description: `We are seeking a talented ${role} to join our dynamic team. This role offers excellent growth opportunities and the chance to work on cutting-edge projects.`,
+        description: `We are seeking a talented ${role} to join our dynamic team. This role offers excellent growth opportunities and the chance to work on cutting-edge projects. You'll collaborate with cross-functional teams and drive innovation in a fast-paced environment.`,
         url: `https://linkedin.com/jobs/view/${Math.floor(Math.random() * 1000000)}`,
         postedDate: postedDate,
         platform: 'LinkedIn',
         salary: this.generateSalary(),
         type: Math.random() > 0.8 ? 'Contract' : 'Full-time',
-        skills: this.generateSkills(role)
+        experienceLevel: experienceLevels[Math.floor(Math.random() * experienceLevels.length)],
+        h1bSponsorship: Math.random() > 0.7, // 30% chance of H1B sponsorship
+        skills: this.generateSkills(role),
+        benefits: this.generateBenefits(),
+        remote: locations[Math.floor(Math.random() * locations.length)].includes('Remote') || Math.random() > 0.7
       });
     }
     
@@ -138,6 +158,18 @@ class LinkedInScraper {
     // Return 3-5 random skills
     const shuffled = skills.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, Math.floor(Math.random() * 3) + 3);
+  }
+
+  generateBenefits() {
+    const allBenefits = [
+      'Health Insurance', '401k', 'Stock Options', 'Flexible PTO', 'Remote Work',
+      'Professional Development', 'Dental Insurance', 'Vision Insurance', 
+      'Gym Membership', 'Mental Health Support', 'Parental Leave', 'Education Budget'
+    ];
+    
+    const numBenefits = Math.floor(Math.random() * 4) + 3; // 3-6 benefits
+    const shuffled = allBenefits.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, numBenefits);
   }
 }
 

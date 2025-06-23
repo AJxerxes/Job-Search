@@ -705,10 +705,25 @@ function JobSearchApp() {
         </Alert>
       )}
 
-      {/* Job Statistics */}
+      {/* Enhanced Job Statistics inspired by Remote Rocketship */}
       {jobs.length > 0 && (
         <Card className="job-stats">
           <CardContent>
+            <Box sx={{ textAlign: 'center', mb: 3 }}>
+              <Typography variant="h5" sx={{ 
+                fontWeight: 700,
+                background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                mb: 1
+              }}>
+                🚀 Job Discovery Analytics
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
+                Real-time insights from our enhanced job search platform
+              </Typography>
+            </Box>
+            
             <Grid container spacing={2} textAlign="center">
               <Grid item xs={6} md={2} className="stat-item">
                 <div className="stat-value">{jobStats.totalJobs}</div>
@@ -739,6 +754,65 @@ function JobSearchApp() {
                 <div className="stat-label">Last Hour</div>
               </Grid>
             </Grid>
+
+            {/* Premium Features Preview */}
+            <Box sx={{ 
+              mt: 3, 
+              pt: 3, 
+              borderTop: '1px solid rgba(0,0,0,0.1)',
+              background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05))',
+              borderRadius: '12px',
+              p: 2
+            }}>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs={12} md={8}>
+                  <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                    ✨ Enhanced with Remote Rocketship Features
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
+                    <Chip label="💰 Funding Info" size="small" className="funding-badge" />
+                    <Chip label="🦅 H1B Indicators" size="small" className="h1b-indicator" />
+                    <Chip label="🏢 Company Insights" size="small" sx={{ 
+                      background: 'linear-gradient(45deg, #9C27B0, #7B1FA2)',
+                      color: 'white',
+                      fontWeight: 500
+                    }} />
+                    <Chip label="📊 Tech Stack Tags" size="small" sx={{ 
+                      background: 'linear-gradient(45deg, #FF5722, #D84315)',
+                      color: 'white',
+                      fontWeight: 500
+                    }} />
+                  </Box>
+                  <Typography variant="body2" color="text.secondary">
+                    Advanced job metadata • Real-time updates • Enhanced filtering • Company profiles
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={4} sx={{ textAlign: 'center' }}>
+                  <Typography variant="caption" sx={{ 
+                    color: '#4CAF50',
+                    fontWeight: 600,
+                    display: 'block',
+                    mb: 1
+                  }}>
+                    🎉 FREE TIER ACTIVE
+                  </Typography>
+                  <Button 
+                    variant="contained"
+                    size="small"
+                    sx={{
+                      background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                      textTransform: 'none',
+                      fontWeight: 600,
+                      borderRadius: '20px',
+                      px: 3
+                    }}
+                    onClick={() => window.open('https://github.com/AJxerxes/Job-Search', '_blank')}
+                  >
+                    View on GitHub ⭐
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
           </CardContent>
         </Card>
       )}
@@ -753,10 +827,30 @@ function JobSearchApp() {
               sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
             >
               <CardContent sx={{ flexGrow: 1, pt: 2 }}>
+                {/* Header with time and platform */}
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                  <Typography variant="h6" component="h2" sx={{ flexGrow: 1, mr: 1, fontWeight: 600 }}>
-                    {job.title}
-                  </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography variant="caption" sx={{ 
+                      color: '#4CAF50', 
+                      fontWeight: 600,
+                      fontSize: '0.75rem'
+                    }}>
+                      {moment(job.postedDate).fromNow().replace(' ago', '')} ago
+                    </Typography>
+                    {job.h1bSponsorship && (
+                      <Chip 
+                        label="🦅 H1B" 
+                        size="small"
+                        sx={{ 
+                          fontSize: '0.65rem', 
+                          height: 20,
+                          background: 'linear-gradient(45deg, #FF9800, #F57C00)',
+                          color: 'white',
+                          fontWeight: 500
+                        }}
+                      />
+                    )}
+                  </Box>
                   <Chip 
                     label={job.platform} 
                     className={`platform-chip ${job.platform.toLowerCase().replace(' ', '')}`}
@@ -764,13 +858,66 @@ function JobSearchApp() {
                   />
                 </Box>
 
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                  <WorkIcon sx={{ mr: 1, fontSize: 16, color: 'text.secondary' }} />
+                {/* Job Title */}
+                <Typography variant="h6" component="h2" sx={{ 
+                  flexGrow: 1, 
+                  mr: 1, 
+                  fontWeight: 600,
+                  mb: 2,
+                  lineHeight: 1.3
+                }}>
+                  {job.title}
+                </Typography>
+
+                {/* Company with metadata */}
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, flexWrap: 'wrap', gap: 1 }}>
+                  <WorkIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
                   <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
                     {job.company}
                   </Typography>
+                  {job.companySize && (
+                    <Chip 
+                      label={job.companySize}
+                      size="small"
+                      variant="outlined"
+                      sx={{ fontSize: '0.65rem', height: 20 }}
+                    />
+                  )}
+                  {job.industryTags && job.industryTags.length > 0 && (
+                    <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+                      {job.industryTags.slice(0, 2).map((tag, index) => (
+                        <span key={index} style={{
+                          background: 'linear-gradient(45deg, #E3F2FD, #BBDEFB)',
+                          color: '#1565C0',
+                          padding: '2px 6px',
+                          borderRadius: '8px',
+                          fontSize: '0.65rem',
+                          fontWeight: 500
+                        }}>
+                          {tag}
+                        </span>
+                      ))}
+                    </Box>
+                  )}
                 </Box>
 
+                {/* Funding information */}
+                {job.funding && (
+                  <Box sx={{ mb: 1 }}>
+                    <Chip 
+                      label={`💰 ${job.funding}`}
+                      size="small"
+                      sx={{ 
+                        background: 'linear-gradient(45deg, #4CAF50, #45a049)',
+                        color: 'white',
+                        fontSize: '0.7rem',
+                        fontWeight: 500
+                      }}
+                    />
+                  </Box>
+                )}
+
+                {/* Location with country */}
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, flexWrap: 'wrap' }}>
                   <LocationIcon sx={{ mr: 1, fontSize: 16, color: 'text.secondary' }} />
                   <Typography variant="body2" color="text.secondary">
@@ -781,39 +928,67 @@ function JobSearchApp() {
                   )}
                 </Box>
 
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <TimeIcon sx={{ mr: 1, fontSize: 16, color: 'text.secondary' }} />
+                {/* Time and job type */}
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, flexWrap: 'wrap', gap: 1 }}>
+                  <TimeIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
                   <Typography variant="body2" color="text.secondary">
-                    {moment(job.postedDate).fromNow()}
+                    {moment(job.postedDate).format('MMM DD, HH:mm')}
                   </Typography>
                   {job.type && (
                     <span className="location-chip">{job.type}</span>
                   )}
+                  {job.experienceLevel && (
+                    <Chip 
+                      label={job.experienceLevel}
+                      size="small"
+                      variant="outlined"
+                      sx={{ fontSize: '0.65rem', height: 20 }}
+                    />
+                  )}
                 </Box>
 
+                {/* Enhanced salary display */}
                 {job.salary && (
                   <Box sx={{ mb: 2 }}>
                     <span className="salary-highlight">
-                      {job.salary}
+                      💵 {job.salary}
                     </span>
                   </Box>
                 )}
 
-                <Typography variant="body2" className="job-description">
+                {/* Job description */}
+                <Typography variant="body2" className="job-description" sx={{ mb: 2 }}>
                   {job.description?.substring(0, 120)}...
                 </Typography>
 
+                {/* Enhanced skills with tech stack styling */}
                 {(job.skills && job.skills.length > 0) && (
                   <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                    {job.skills.slice(0, 3).map((skill, index) => (
+                    {job.skills.slice(0, 4).map((skill, index) => (
                       <Chip
                         key={index}
                         label={skill}
                         size="small"
-                        variant="outlined"
-                        sx={{ fontSize: '0.7rem', height: 24 }}
+                        sx={{ 
+                          fontSize: '0.7rem', 
+                          height: 22,
+                          background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                          color: 'white',
+                          fontWeight: 500,
+                          '&:hover': {
+                            background: 'linear-gradient(45deg, #764ba2, #667eea)'
+                          }
+                        }}
                       />
                     ))}
+                    {job.skills.length > 4 && (
+                      <Chip
+                        label={`+${job.skills.length - 4} more`}
+                        size="small"
+                        variant="outlined"
+                        sx={{ fontSize: '0.7rem', height: 22 }}
+                      />
+                    )}
                   </Box>
                 )}
               </CardContent>
@@ -829,10 +1004,29 @@ function JobSearchApp() {
                   variant="contained"
                   sx={{ 
                     background: 'linear-gradient(45deg, #667eea, #764ba2)',
-                    '&:hover': { background: 'linear-gradient(45deg, #764ba2, #667eea)' }
+                    '&:hover': { background: 'linear-gradient(45deg, #764ba2, #667eea)' },
+                    textTransform: 'none',
+                    fontWeight: 600
                   }}
                 >
-                  View Job
+                  Apply
+                </Button>
+                <Button 
+                  size="small"
+                  variant="outlined"
+                  onClick={(e) => e.stopPropagation()}
+                  sx={{ 
+                    textTransform: 'none',
+                    borderColor: '#667eea',
+                    color: '#667eea',
+                    '&:hover': {
+                      borderColor: '#764ba2',
+                      color: '#764ba2',
+                      background: 'rgba(102, 126, 234, 0.04)'
+                    }
+                  }}
+                >
+                  View Details
                 </Button>
               </CardActions>
             </Card>
@@ -864,7 +1058,7 @@ function JobSearchApp() {
         </Box>
       )}
 
-      {/* Job Detail Dialog */}
+      {/* Enhanced Job Detail Dialog */}
       <Dialog 
         open={dialogOpen} 
         onClose={closeJobDialog}
@@ -874,25 +1068,100 @@ function JobSearchApp() {
         {selectedJob && (
           <>
             <DialogTitle>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h6">{selectedJob.title}</Typography>
-                <Chip 
-                  label={selectedJob.platform} 
-                  color={getPlatformColor(selectedJob.platform)}
-                />
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                    {selectedJob.title}
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
+                    <Chip 
+                      label={selectedJob.platform} 
+                      className={`platform-chip ${selectedJob.platform.toLowerCase().replace(' ', '')}`}
+                      size="small"
+                    />
+                    {selectedJob.h1bSponsorship && (
+                      <Chip label="🦅 H1B Sponsor" size="small" className="h1b-indicator" />
+                    )}
+                    {selectedJob.experienceLevel && (
+                      <Chip 
+                        label={selectedJob.experienceLevel}
+                        size="small"
+                        className="experience-chip"
+                      />
+                    )}
+                  </Box>
+                </Box>
               </Box>
             </DialogTitle>
             <DialogContent>
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    label="Company"
-                    value={selectedJob.company}
-                    fullWidth
-                    InputProps={{ readOnly: true }}
-                    margin="normal"
-                  />
+              <Grid container spacing={3}>
+                {/* Company Information Section */}
+                <Grid item xs={12}>
+                  <Box sx={{ 
+                    background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05))',
+                    borderRadius: '12px',
+                    p: 2,
+                    mb: 2
+                  }}>
+                    <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+                      🏢 Company Information
+                    </Typography>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          label="Company"
+                          value={selectedJob.company}
+                          fullWidth
+                          InputProps={{ readOnly: true }}
+                          size="small"
+                        />
+                      </Grid>
+                      {selectedJob.companySize && (
+                        <Grid item xs={12} md={6}>
+                          <TextField
+                            label="Company Size"
+                            value={selectedJob.companySize}
+                            fullWidth
+                            InputProps={{ readOnly: true }}
+                            size="small"
+                          />
+                        </Grid>
+                      )}
+                      {selectedJob.funding && (
+                        <Grid item xs={12} md={6}>
+                          <TextField
+                            label="Funding"
+                            value={selectedJob.funding}
+                            fullWidth
+                            InputProps={{ readOnly: true }}
+                            size="small"
+                          />
+                        </Grid>
+                      )}
+                      {selectedJob.industryTags && selectedJob.industryTags.length > 0 && (
+                        <Grid item xs={12} md={6}>
+                          <Box>
+                            <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
+                              Industry
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
+                              {selectedJob.industryTags.map((tag, index) => (
+                                <Chip
+                                  key={index}
+                                  label={tag}
+                                  size="small"
+                                  className="industry-tag"
+                                />
+                              ))}
+                            </Box>
+                          </Box>
+                        </Grid>
+                      )}
+                    </Grid>
+                  </Box>
                 </Grid>
+
+                {/* Job Details Section */}
                 <Grid item xs={12} md={6}>
                   <TextField
                     label="Location"
@@ -900,6 +1169,7 @@ function JobSearchApp() {
                     fullWidth
                     InputProps={{ readOnly: true }}
                     margin="normal"
+                    size="small"
                   />
                 </Grid>
                 {selectedJob.country && selectedJob.country !== 'Unknown' && (
@@ -910,6 +1180,7 @@ function JobSearchApp() {
                       fullWidth
                       InputProps={{ readOnly: true }}
                       margin="normal"
+                      size="small"
                     />
                   </Grid>
                 )}
@@ -921,6 +1192,7 @@ function JobSearchApp() {
                       fullWidth
                       InputProps={{ readOnly: true }}
                       margin="normal"
+                      size="small"
                     />
                   </Grid>
                 )}
@@ -932,6 +1204,7 @@ function JobSearchApp() {
                       fullWidth
                       InputProps={{ readOnly: true }}
                       margin="normal"
+                      size="small"
                     />
                   </Grid>
                 )}
@@ -939,10 +1212,11 @@ function JobSearchApp() {
                   <Grid item xs={12} md={6}>
                     <TextField
                       label="Equity"
-                      value={selectedJob.equity}
+                      value="Yes - Equity Package Included"
                       fullWidth
                       InputProps={{ readOnly: true }}
                       margin="normal"
+                      size="small"
                     />
                   </Grid>
                 )}
@@ -953,49 +1227,95 @@ function JobSearchApp() {
                     fullWidth
                     InputProps={{ readOnly: true }}
                     margin="normal"
+                    size="small"
                   />
                 </Grid>
+
+                {/* Skills and Benefits */}
                 {selectedJob.skills && selectedJob.skills.length > 0 && (
-                  <Grid item xs={12}>
+                  <Grid item xs={12} md={6}>
                     <Box sx={{ mt: 2 }}>
-                      <Typography variant="subtitle2" gutterBottom>Skills</Typography>
+                      <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 600 }}>
+                        💻 Required Skills
+                      </Typography>
                       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                         {selectedJob.skills.map((skill, index) => (
                           <Chip
                             key={index}
                             label={skill}
                             size="small"
-                            color="primary"
-                            variant="outlined"
+                            className="skill-tag"
                           />
                         ))}
                       </Box>
                     </Box>
                   </Grid>
                 )}
+
+                {selectedJob.benefits && selectedJob.benefits.length > 0 && (
+                  <Grid item xs={12} md={6}>
+                    <Box sx={{ mt: 2 }}>
+                      <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 600 }}>
+                        🎁 Benefits
+                      </Typography>
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                        {selectedJob.benefits.slice(0, 6).map((benefit, index) => (
+                          <Chip
+                            key={index}
+                            label={benefit}
+                            size="small"
+                            variant="outlined"
+                            sx={{ 
+                              borderColor: '#667eea',
+                              color: '#667eea',
+                              '&:hover': { background: 'rgba(102, 126, 234, 0.1)' }
+                            }}
+                          />
+                        ))}
+                        {selectedJob.benefits.length > 6 && (
+                          <Chip
+                            label={`+${selectedJob.benefits.length - 6} more`}
+                            size="small"
+                            variant="outlined"
+                            sx={{ borderColor: '#9E9E9E', color: '#9E9E9E' }}
+                          />
+                        )}
+                      </Box>
+                    </Box>
+                  </Grid>
+                )}
+
+                {/* Job Description */}
                 <Grid item xs={12}>
                   <TextField
-                    label="Description"
+                    label="📋 Job Description"
                     value={selectedJob.description || 'No description available'}
                     fullWidth
                     multiline
-                    rows={6}
+                    rows={4}
                     InputProps={{ readOnly: true }}
                     margin="normal"
                   />
                 </Grid>
               </Grid>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={closeJobDialog}>Close</Button>
+            <DialogActions sx={{ p: 3, gap: 2 }}>
+              <Button 
+                onClick={closeJobDialog}
+                variant="outlined"
+                sx={{ borderRadius: '12px', textTransform: 'none' }}
+              >
+                Close
+              </Button>
               <Button 
                 variant="contained"
                 href={selectedJob.url} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 startIcon={<LaunchIcon />}
+                className="enhanced-apply-btn"
               >
-                View on {selectedJob.platform}
+                Apply on {selectedJob.platform}
               </Button>
             </DialogActions>
           </>
