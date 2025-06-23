@@ -7,6 +7,7 @@ const smartrecruitersSecraper = require('./smartrecruiters');
 const builtinScraper = require('./builtin');
 const notionScraper = require('./notion');
 const ycombinatorScraper = require('./ycombinator');
+const workdayScraper = require('./workday');
 
 module.exports = {
   linkedin: linkedinScraper,
@@ -17,5 +18,6 @@ module.exports = {
   smartrecruiters: smartrecruitersSecraper,
   builtin: builtinScraper,
   notion: notionScraper,
-  ycombinator: ycombinatorScraper
+  ycombinator: ycombinatorScraper,
+  workday: workdayScraper
 }; 

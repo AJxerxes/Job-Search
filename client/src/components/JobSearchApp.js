@@ -86,8 +86,20 @@ function JobSearchApp() {
   const [sortOrder, setSortOrder] = useState('desc');
   
   // Available options for filters
-  const [availableCountries, setAvailableCountries] = useState([]);
-  const [availablePlatforms, setAvailablePlatforms] = useState([]);
+  const [availableCountries, setAvailableCountries] = useState([
+    'Remote', 'United States', 'United Kingdom', 'Canada', 'Germany', 'France', 
+    'Netherlands', 'Australia', 'India', 'Singapore', 'Ireland', 'Spain', 
+    'Sweden', 'Switzerland', 'Italy', 'Japan', 'South Korea', 'China', 'Brazil', 
+    'Mexico', 'Argentina', 'Chile', 'Colombia', 'Norway', 'Denmark', 'Finland', 
+    'Belgium', 'Austria', 'Poland', 'Czech Republic', 'Portugal', 'Israel', 
+    'United Arab Emirates', 'South Africa', 'New Zealand', 'Russia', 'Turkey', 
+    'Thailand', 'Vietnam', 'Philippines', 'Indonesia', 'Malaysia', 'Egypt', 
+    'Nigeria', 'Kenya', 'Ghana', 'Other'
+  ]);
+  const [availablePlatforms, setAvailablePlatforms] = useState([
+    'LinkedIn', 'Wellfound', 'Greenhouse', 'Lever', 'Workable', 'SmartRecruiters', 
+    'Builtin', 'Notion', 'Y Combinator', 'Workday'
+  ]);
   
   // UI states
   const [filtersExpanded, setFiltersExpanded] = useState(false);
@@ -102,6 +114,9 @@ function JobSearchApp() {
     fetchAvailableCountries();
     fetchAvailablePlatforms();
     loadCachedResults();
+    
+    // Debug logging
+    console.log('JobSearchApp initialized');
   }, []);
 
   // Auto-refresh every 15 minutes
@@ -146,19 +161,29 @@ function JobSearchApp() {
 
   const fetchAvailableCountries = async () => {
     try {
+      console.log('Fetching available countries...');
       const response = await axios.get('/api/jobs/countries');
-      setAvailableCountries(response.data.countries || []);
+      console.log('Countries response:', response.data);
+      if (response.data.countries && response.data.countries.length > 0) {
+        setAvailableCountries(response.data.countries);
+        console.log('Updated available countries:', response.data.countries);
+      }
     } catch (error) {
       console.error('Error fetching countries:', error);
+      console.log('Using fallback countries list');
+      // Keep the default fallback countries list
     }
   };
 
   const fetchAvailablePlatforms = async () => {
     try {
       const response = await axios.get('/api/jobs/platforms');
-      setAvailablePlatforms(response.data.platforms || []);
+      if (response.data.platforms && response.data.platforms.length > 0) {
+        setAvailablePlatforms(response.data.platforms);
+      }
     } catch (error) {
       console.error('Error fetching platforms:', error);
+      // Keep the default fallback platforms list
     }
   };
 
@@ -203,6 +228,7 @@ function JobSearchApp() {
     setSuccess('');
 
     try {
+      console.log('Starting search with:', { roles: selectedRoles, filters, sortBy, sortOrder });
       const response = await axios.post('/api/jobs/search', {
         roles: selectedRoles,
         filters,
@@ -211,6 +237,13 @@ function JobSearchApp() {
       });
 
       if (response.data.success) {
+        console.log('Search completed. Jobs found:', response.data.jobs.length);
+        console.log('First few jobs dates:', response.data.jobs.slice(0, 3).map(job => ({ 
+          title: job.title, 
+          date: job.postedDate,
+          dateFormatted: moment(job.postedDate).format('MMM DD, HH:mm')
+        })));
+        
         setJobs(response.data.jobs);
         setTotalJobsBeforeFilter(response.data.totalJobsBeforeFilter || response.data.jobs.length);
         setLastSearchTime(response.data.timestamp);
@@ -634,7 +667,10 @@ function JobSearchApp() {
                   </Tooltip>
                   
                   <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>
-                    {sortOrder === 'desc' ? 'High to Low' : 'Low to High'}
+                    {sortBy === 'date' 
+                      ? (sortOrder === 'desc' ? 'Newest First' : 'Oldest First')
+                      : (sortOrder === 'desc' ? 'High to Low' : 'Low to High')
+                    }
                   </Typography>
                 </div>
               </div>

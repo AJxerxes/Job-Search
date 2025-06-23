@@ -26,18 +26,50 @@ class JobSearchService {
     // Common patterns for extracting country
     const countryPatterns = {
       'United States': ['US', 'USA', 'United States', 'CA', 'NY', 'TX', 'FL', 'WA', 'IL', 'MA', 'GA', 'NC', 'VA', 'NJ', 'PA', 'OH', 'MI', 'TN', 'AZ', 'IN', 'MO', 'MD', 'WI', 'MN', 'CO', 'AL', 'SC', 'LA', 'KY', 'OR', 'OK', 'CT', 'UT', 'IA', 'NV', 'AR', 'MS', 'KS', 'NM', 'NE', 'WV', 'ID', 'HI', 'NH', 'ME', 'MT', 'RI', 'DE', 'SD', 'ND', 'AK', 'VT', 'WY'],
-      'United Kingdom': ['UK', 'United Kingdom', 'London', 'Manchester', 'Birmingham', 'Leeds', 'Glasgow', 'Sheffield', 'Bradford', 'Liverpool', 'Edinburgh'],
+      'United Kingdom': ['UK', 'United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland', 'London', 'Manchester', 'Birmingham', 'Leeds', 'Glasgow', 'Sheffield', 'Bradford', 'Liverpool', 'Edinburgh'],
       'Canada': ['Canada', 'Toronto', 'Vancouver', 'Montreal', 'Calgary', 'Ottawa', 'Edmonton', 'Mississauga', 'Winnipeg', 'Quebec'],
-      'Germany': ['Germany', 'Berlin', 'Munich', 'Frankfurt', 'Hamburg', 'Cologne', 'Stuttgart', 'Düsseldorf'],
+      'Germany': ['Germany', 'Deutschland', 'Berlin', 'Munich', 'Frankfurt', 'Hamburg', 'Cologne', 'Stuttgart', 'Düsseldorf'],
       'France': ['France', 'Paris', 'Lyon', 'Marseille', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg'],
-      'Netherlands': ['Netherlands', 'Amsterdam', 'Rotterdam', 'The Hague', 'Utrecht', 'Eindhoven'],
+      'Netherlands': ['Netherlands', 'Holland', 'Amsterdam', 'Rotterdam', 'The Hague', 'Utrecht', 'Eindhoven'],
       'Australia': ['Australia', 'Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide', 'Gold Coast'],
       'India': ['India', 'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Pune'],
       'Singapore': ['Singapore'],
       'Ireland': ['Ireland', 'Dublin', 'Cork', 'Limerick', 'Galway'],
-      'Spain': ['Spain', 'Madrid', 'Barcelona', 'Valencia', 'Seville', 'Bilbao'],
-      'Sweden': ['Sweden', 'Stockholm', 'Gothenburg', 'Malmö'],
-      'Switzerland': ['Switzerland', 'Zurich', 'Geneva', 'Basel', 'Bern']
+      'Spain': ['Spain', 'España', 'Madrid', 'Barcelona', 'Valencia', 'Seville', 'Bilbao'],
+      'Sweden': ['Sweden', 'Stockholm', 'Gothenberg', 'Malmö'],
+      'Switzerland': ['Switzerland', 'Zurich', 'Geneva', 'Basel', 'Bern'],
+      'Italy': ['Italy', 'Italia', 'Rome', 'Milan', 'Naples', 'Turin', 'Florence'],
+      'Japan': ['Japan', 'Tokyo', 'Osaka', 'Kyoto', 'Nagoya', 'Yokohama'],
+      'South Korea': ['South Korea', 'Korea', 'Seoul', 'Busan', 'Incheon'],
+      'China': ['China', 'Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen'],
+      'Brazil': ['Brazil', 'São Paulo', 'Rio de Janeiro', 'Brasília'],
+      'Mexico': ['Mexico', 'Mexico City', 'Guadalajara', 'Monterrey'],
+      'Argentina': ['Argentina', 'Buenos Aires', 'Córdoba', 'Rosario'],
+      'Chile': ['Chile', 'Santiago', 'Valparaíso'],
+      'Colombia': ['Colombia', 'Bogotá', 'Medellín', 'Cali'],
+      'Norway': ['Norway', 'Oslo', 'Bergen', 'Trondheim'],
+      'Denmark': ['Denmark', 'Copenhagen', 'Aarhus', 'Odense'],
+      'Finland': ['Finland', 'Helsinki', 'Tampere', 'Turku'],
+      'Belgium': ['Belgium', 'Brussels', 'Antwerp', 'Ghent'],
+      'Austria': ['Austria', 'Vienna', 'Salzburg', 'Innsbruck'],
+      'Poland': ['Poland', 'Warsaw', 'Krakow', 'Gdansk'],
+      'Czech Republic': ['Czech Republic', 'Prague', 'Brno'],
+      'Portugal': ['Portugal', 'Lisbon', 'Porto'],
+      'Israel': ['Israel', 'Tel Aviv', 'Jerusalem', 'Haifa'],
+      'United Arab Emirates': ['UAE', 'United Arab Emirates', 'Dubai', 'Abu Dhabi'],
+      'South Africa': ['South Africa', 'Cape Town', 'Johannesburg', 'Durban'],
+      'New Zealand': ['New Zealand', 'Auckland', 'Wellington', 'Christchurch'],
+      'Russia': ['Russia', 'Moscow', 'St. Petersburg', 'Novosibirsk'],
+      'Turkey': ['Turkey', 'Istanbul', 'Ankara', 'Izmir'],
+      'Thailand': ['Thailand', 'Bangkok', 'Chiang Mai'],
+      'Vietnam': ['Vietnam', 'Ho Chi Minh City', 'Hanoi'],
+      'Philippines': ['Philippines', 'Manila', 'Cebu', 'Davao'],
+      'Indonesia': ['Indonesia', 'Jakarta', 'Surabaya', 'Bandung'],
+      'Malaysia': ['Malaysia', 'Kuala Lumpur', 'Penang', 'Johor Bahru'],
+      'Egypt': ['Egypt', 'Cairo', 'Alexandria'],
+      'Nigeria': ['Nigeria', 'Lagos', 'Abuja', 'Kano'],
+      'Kenya': ['Kenya', 'Nairobi', 'Mombasa'],
+      'Ghana': ['Ghana', 'Accra', 'Kumasi']
     };
 
     // Check for "Remote" first
@@ -55,6 +87,59 @@ class JobSearchService {
     }
 
     return 'Other';
+  }
+
+  // Get all available countries (static list)
+  getAllCountries() {
+    return [
+      'Remote',
+      'United States',
+      'United Kingdom', 
+      'Canada',
+      'Germany',
+      'France',
+      'Netherlands',
+      'Australia',
+      'India',
+      'Singapore',
+      'Ireland',
+      'Spain',
+      'Sweden',
+      'Switzerland',
+      'Italy',
+      'Japan',
+      'South Korea',
+      'China',
+      'Brazil',
+      'Mexico',
+      'Argentina',
+      'Chile',
+      'Colombia',
+      'Norway',
+      'Denmark',
+      'Finland',
+      'Belgium',
+      'Austria',
+      'Poland',
+      'Czech Republic',
+      'Portugal',
+      'Israel',
+      'United Arab Emirates',
+      'South Africa',
+      'New Zealand',
+      'Russia',
+      'Turkey',
+      'Thailand',
+      'Vietnam',
+      'Philippines',
+      'Indonesia',
+      'Malaysia',
+      'Egypt',
+      'Nigeria',
+      'Kenya',
+      'Ghana',
+      'Other'
+    ];
   }
 
   // Parse salary from string to numeric value for sorting
@@ -131,7 +216,23 @@ class JobSearchService {
         sortedJobs.sort((a, b) => {
           const dateA = moment(a.postedDate);
           const dateB = moment(b.postedDate);
-          return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+          
+          // Ensure valid dates - invalid dates go to the end
+          if (!dateA.isValid() && !dateB.isValid()) return 0;
+          if (!dateA.isValid()) return 1; // A goes to end
+          if (!dateB.isValid()) return -1; // B goes to end
+          
+          // Compare timestamps for valid dates
+          const timestampA = dateA.valueOf();
+          const timestampB = dateB.valueOf();
+          
+          if (sortOrder === 'desc') {
+            // Most recent first (newest to oldest)
+            return timestampB - timestampA;
+          } else {
+            // Oldest first
+            return timestampA - timestampB;
+          }
         });
         break;
 
@@ -168,11 +269,18 @@ class JobSearchService {
         break;
 
       default:
-        // Default sort by date (newest first)
+        // Default sort by date (newest first) - improved logic
         sortedJobs.sort((a, b) => {
           const dateA = moment(a.postedDate);
           const dateB = moment(b.postedDate);
-          return dateB - dateA;
+          
+          // Handle invalid dates
+          if (!dateA.isValid() && !dateB.isValid()) return 0;
+          if (!dateA.isValid()) return 1; // A goes to end
+          if (!dateB.isValid()) return -1; // B goes to end
+          
+          // Most recent first (newest to oldest)
+          return dateB.valueOf() - dateA.valueOf();
         });
     }
 
@@ -184,7 +292,7 @@ class JobSearchService {
     const results = [];
     const platforms = [
       'linkedin', 'wellfound', 'greenhouse', 'lever', 'workable', 
-      'smartrecruiters', 'builtin', 'notion', 'ycombinator'
+      'smartrecruiters', 'builtin', 'notion', 'ycombinator', 'workday'
     ];
 
     console.log(`Searching ${platforms.length} platforms for roles:`, roles);
@@ -271,14 +379,13 @@ class JobSearchService {
 
   // Get available countries
   getAvailableCountries() {
-    const countries = [...new Set(this.cachedResults.map(job => this.extractCountry(job.location)))];
-    return countries.sort();
+    // Return static list of countries instead of dynamic extraction
+    return this.getAllCountries();
   }
 
   // Get available platforms
   getAvailablePlatforms() {
-    const platforms = [...new Set(this.cachedResults.map(job => job.platform))];
-    return platforms.sort();
+    return ['LinkedIn', 'Wellfound', 'Greenhouse', 'Lever', 'Workable', 'SmartRecruiters', 'Builtin', 'Notion', 'Y Combinator', 'Workday'];
   }
 
   // Get cached results with optional filtering and sorting
